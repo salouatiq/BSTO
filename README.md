@@ -40,21 +40,21 @@ Ce projet collecte, transforme et stocke des données liées aux flux touristiqu
 ## 🚀 Comment lancer le projet en local ?
 
 **1. Cloner le dépôt**
-\`\`\`bash \`\`\`
-
-  git clone git@github.com:salouatiq/BSTO.git
-
+```bash 
+git clone git@github.com:salouatiq/BSTO.git
+```
+  
 
 **2. Installer les dépendances**
-\`\`\`bash \`\`\`
-
+```bash
 pip install -r requirements.txt
+```
 
 
 **3. Lancer le pipeline complet**
-\`\`\`bash \`\`\`
-
+```bash
 python scripts/main.py
+```
 
 
 ---
