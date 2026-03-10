@@ -11,6 +11,22 @@ Créer une **plateforme publique de données territoriales** qui permet :
 3. aux **investisseurs touristiques** (gites, auberges, camping, etc.) de choisir des zones **sous-offertes**
 4. de **répartir les flux touristiques** sans dépasser la capacité locale.
 
+### Impact pour la mairie
+#### décision publique
+* limiter Airbnb dans les zones saturées
+* encourager le toursime dans les villages voisins
+  
+#### urbanisme
+* réguler les permis toursitiques
+  
+#### transition écologique
+  * réduire la pression sur les écosystèmes
+   
+### Impact pour les investisseurs responsables
+* identifier les zones **où créer un gîte sans nuire au territoire**
+* comprendre la capaciré réelle d'accueil
+* éviter la spéculation
+
 ## 🎯 Objectif du projet
 
 Construire un **indice de pression touristique territoriale** pour chaque quartier ou village autour de Briançon.
@@ -26,6 +42,7 @@ Cet indice combine:
 Résultat:
 
 Une **carte de recommandations d'investissement durable**.
+
 
 ---
 
