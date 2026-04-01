@@ -72,33 +72,31 @@ graph TD
 ```
 ---
 
-## 📂 Structure du dépôt
+## 📂 Structure du Projet
 
-📁 `dags/` : Les workflows Airflow (DAGs)
-
-📁 `scripts/` : Scripts d'extraction (API) et de chargement et transformation DuckDB *(équiv. BigQuery)*
-
-📁 `data/` : Dossier contenant les données brutes et traitées (ignoré par Git)
-
-📁 `sql/` : Requêtes de création de tables et de vues
-
-📁 `tests/` : Tests unitaires
-
-📁 `config/` : Fichiers de configuration (YAML/JSON)
-
-📁 `src/` : Fichiers code source
-
-📁 `.venv/` : Environnement virtuel
-
-📄 `main.py`  : Le chef d'orchestre qui appelle les scripts ETL dans l'ordre
-
-📄 `README.md` : Documentation du projet
-
-📄 `requirements.txt` : Liste des dépendances Python
-
-📄 `.gitignore`
-
-
+```text
+briancon-tourism-observatory/
+├── 📄docker-compose.yml        # Conteneur global 
+├── 📄.gitignore
+├── 📄.env                      # Pour stocker tes mots de passe localement
+├── 📄README.md                 # Documentation du projet
+├── 📄requirements.txt          # Liste des dépendances Python
+├── 📄main.py                   # Le chef d'orchestre qui appelle les scripts ETL dans l'ordre
+├── 📁.venv/                    # Environnement virtuel
+├── 📁dags/                     # Les workflows Airflow (DAGs)
+├── 📁scripts/                  # Scripts d'extraction (API) et de chargement et transformation DuckDB *(équiv. BigQuery)*
+│   ├── 📄extract_api.py
+│   └── 📄load_to_duckdb.py
+├── 📁src/                      # Mon code (source) réutilisable (logique métier)
+│   ├── 📄__init__.py
+│   └── 📄utils.py
+├── 📁data/                     # Monté en volume Docker (miroir de GCS) : Dossier contenant les données brutes et traitées (ignoré par Git)
+│   ├── 📄raw/                  # Équivalent Bucket "Landing"
+│   └── 📄gold/                 # Équivalent BigQuery (Fichiers DuckDB)
+├── 📁sql/                      # Requêtes de création de tables et de vues
+├── 📁tests/                    # Tests unitaires
+└── 📁config/                   # Fichiers de configuration (YAML/JSON)
+```
 ---
 
 ## 🚀 Comment lancer le projet en local ?
