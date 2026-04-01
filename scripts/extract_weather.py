@@ -18,6 +18,7 @@ from minio import Minio
 from minio.error import S3Error
 from dotenv import load_dotenv
 import logging
+import io
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -77,13 +78,14 @@ def extract_weather_data():
         
         # Convertir en JSON string pour upload
         json_data = json.dumps(data, ensure_ascii=False, indent=4)
+        json_bytes = json_data.encode('utf-8')
         
         # Upload
         client.put_object(
             MINIO_BUCKET,
             filename,
-            data=json_data,
-            length=len(json_data),
+            data=io.BytesIO(json_bytes),
+            length=len(json_bytes),
             content_type='application/json'
         )
         

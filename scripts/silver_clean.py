@@ -10,6 +10,7 @@ from minio import Minio
 from minio.error import S3Error
 import logging
 from dotenv import load_dotenv
+import io
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -60,13 +61,14 @@ def process_file(client, object_name):
 
         # Convertir en JSON string pour upload (pas de sauvegarde locale)
         json_data = df_clean.to_json(orient='records', date_format='iso')
+        json_bytes = json_data.encode('utf-8')
 
         # Uploader vers silver
         client.put_object(
             MINIO_BUCKET_SILVER,
             f"clean_{object_name}",
-            data=json_data,
-            length=len(json_data),
+            data=io.BytesIO(json_bytes),
+            length=len(json_bytes),
             content_type='application/json'
         )
 

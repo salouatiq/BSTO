@@ -23,7 +23,7 @@ MINIO_BUCKET_GOLD = "briancon-gold"
 MINIO_SECURE = False
 
 GOLD_DIR = "../data/gold"
-DUCKDB_PATH = "data/duckdb/briancon.duckdb"
+DUCKDB_PATH = "../data/duckdb/briancon.duckdb"
 
 def create_minio_client():
     client = Minio(MINIO_ENDPOINT, access_key=MINIO_ACCESS_KEY, secret_key=MINIO_SECRET_KEY, secure=MINIO_SECURE)
@@ -62,14 +62,17 @@ def process_silver_to_gold(client):
 
     # Concaténer
     full_df = pd.concat(all_data, ignore_index=True)
+    logger.info(f"Données concaténées: {len(full_df)} lignes")
 
     # Agréger
     agg_df = aggregate_weather_data(full_df)
+    logger.info(f"Données agrégées: {len(agg_df)} lignes")
 
     # Sauvegarder en parquet local (optionnel pour archivage)
     os.makedirs(GOLD_DIR, exist_ok=True)
     parquet_path = os.path.join(GOLD_DIR, "weather_gold.parquet")
-    agg_df.to_parquet(parquet_path, index=False)
+    agg_df.to_parquet(parquet_path, index=False, engine='pyarrow')
+    logger.info(f"Parquet sauvegardé: {parquet_path}")
 
     # Uploader vers gold
     client.fput_object(MINIO_BUCKET_GOLD, "weather_gold.parquet", parquet_path)
@@ -77,7 +80,7 @@ def process_silver_to_gold(client):
     # Charger dans DuckDB
     con = duckdb.connect(DUCKDB_PATH)
     con.execute("DROP TABLE IF EXISTS weather_daily")
-    con.execute("CREATE TABLE weather_daily AS SELECT * FROM read_parquet(?)", [parquet_path])
+    con.execute(f"CREATE TABLE weather_daily AS SELECT * FROM read_parquet('{parquet_path}')")
     con.close()
 
     logger.info("Agrégation gold et chargement DuckDB terminé")
