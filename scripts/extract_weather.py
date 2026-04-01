@@ -1,3 +1,15 @@
+# Script d'extraction des données météo pour Briançon
+# Ce script fait une requête à l'API Open-Meteo pour récupérer les données météo historiques des 10 derniers jours pour Briançon, et sauvegarde les données brutes dans un dossier local (notre équivalent de GCS).
+# Note 1:
+# ------
+    # Assurez-vous d'avoir une connexion internet pour que le script puisse accéder à l'API Open-Meteo.
+    # Pour exécuter ce script, utilisez la commande : python scripts/extract_weather.py
+    # Ce script est un point de départ pour votre pipeline d'extraction. En production, vous pourriez vouloir ajouter des fonctionnalités comme la gestion des erreurs plus avancée, les notifications en cas d'échec, ou l'intégration avec d'autres sources de données météo pour un enrichissement plus complet.
+# Note 2:
+# ------
+    # Ce script utilise la bibliothèque requests pour faire des appels HTTP, et json pour manipuler les données. Assurez-vous d'avoir ces bibliothèques installées dans votre environnement Python : pip install requests
+    # N'hésitez pas à consulter la documentation de l'API Open-Meteo pour découvrir toutes les fonctionnalités disponibles et personnaliser votre requête selon vos besoins spécifiques en matière de données météo !
+# Documentation de l'API Open-Meteo : https://open-meteo.com/en/docs
 import requests
 import json
 import os
