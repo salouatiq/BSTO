@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # ============================================
   # STOCKAGE : MinIO (remplace Google Cloud Storage)
@@ -34,31 +32,10 @@ services:
     entrypoint: >
       /bin/sh -c "
       /usr/bin/mc alias set myminio http://minio:9000 admin briancon2026;
-      /usr/bin/mc mb --ignore-existing myminio/briancon-raw;
+      /usr/bin/mc mb --ignore-existing myminio/briancon-bronze;
+      /usr/bin/mc mb --ignore-existing myminio/briancon-silver;
       /usr/bin/mc mb --ignore-existing myminio/briancon-gold;
       exit 0;
-      "
-
-  # ============================================
-  # BASE DE DONNÉES : DuckDB (remplace BigQuery)
-  # ============================================
-  duckdb:
-    image: ghcr.io/duckdb/duckdb:latest
-    container_name: briancon_database
-    ports:
-      - "8001:8001"    # Interface web DuckDB Studio (optionnel)
-    volumes:
-      - ./data/duckdb:/var/lib/duckdb   # Stockage persistent de la DB
-    environment:
-      DUCKDB_HOME: /var/lib/duckdb
-    healthcheck:
-      test: [ "CMD", "test", "-f", "/var/lib/duckdb/briancon.duckdb" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    command: >
-      sh -c "
-      duckdb /var/lib/duckdb/briancon.duckdb -c 'SELECT 1;' || echo 'DB initialized'
       "
 
 # ============================================
