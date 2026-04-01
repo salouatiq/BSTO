@@ -65,8 +65,8 @@ Une **carte de recommandations d'investissement durable**.
 ```mermaid
 graph TD
     A[Open Data] --> B[Python ingestion]
-    B --> C[("Cloud Storage (raw data)")]
-    C --> D[("BigQuery (tables nettoyées)")]
+    B --> C[("MinIO (équiv. Cloud Storage) (raw data)")]
+    C --> D[("DuckDB (équiv. BigQuery) (tables nettoyées)")]
     D --> E[calcul des indicateurs]
     E --> F[API + Dashboard]
 ```
