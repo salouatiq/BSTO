@@ -1,2 +1,8 @@
+# environnements et caches
 .venv/
+__pycache__/
+*.pyc
+pip-wheel-metadata/
+*.whl
+
 data/
