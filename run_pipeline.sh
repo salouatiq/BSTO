@@ -1,5 +1,6 @@
 #!/bin/bash
-# Script pour exécuter le pipeline BSTO complet
+# Script pour exécuter le pipeline BSTO complet : Ce script automatise l'exécution complète du pipeline de données BSTO (Briancon Storage) en suivant l'architecture Medallion (Bronze → Silver → Gold).
+
 # Architecture Medallion : Bronze → Silver → Gold
 
 echo "🚀 Démarrage du pipeline BSTO..."
