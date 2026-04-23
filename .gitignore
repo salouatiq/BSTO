@@ -5,4 +5,7 @@ __pycache__/
 pip-wheel-metadata/
 *.whl
 
+# fichiers de configuration sensibles
+.env
+
 data/
