@@ -19,7 +19,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
   # ============================================
   # CRÉATION DES BUCKETS MinIO
   # ============================================
@@ -37,7 +36,20 @@ services:
       /usr/bin/mc mb --ignore-existing myminio/briancon-gold;
       exit 0;
       "
-
+# ============================================
+  # STAGING : PostgreSQL (remplace BigQuery)
+  # ============================================
+  postgres:
+    image: postgres:15
+    container_name: briancon_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: briancon2026
+      POSTGRES_DB: briancon_db
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
 # ============================================
 # RÉSEAU DOCKER
 # ============================================
