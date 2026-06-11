@@ -9,3 +9,5 @@ pip-wheel-metadata/
 .env
 
 data/
+
+postgres_data/
