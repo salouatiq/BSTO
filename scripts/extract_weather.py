@@ -35,18 +35,22 @@ LONGITUDE = 6.64
 # URL de l'API Open-Meteo (Historique des 10 derniers jours)
 API_URL = f"https://api.open-meteo.com/v1/forecast?latitude={LATITUDE}&longitude={LONGITUDE}&past_days=10&hourly=temperature_2m,precipitation&timezone=Europe%2FParis"
 
-# Configuration MinIO Bronze
-MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")
-MINIO_ACCESS_KEY = os.getenv("MINIO_USER", "admin")
-MINIO_SECRET_KEY = os.getenv("MINIO_PASSWORD", "briancon2026")
-MINIO_BUCKET = "briancon-bronze"
-MINIO_SECURE = False
+# Configuration MinIO Bronze 
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")  # L'adresse de notre stockage
+MINIO_ACCESS_KEY = os.getenv("MINIO_USER", "admin")             # L'identifiant défini dans mon docker-compose
+MINIO_SECRET_KEY = os.getenv("MINIO_PASSWORD", "briancon2026")  # Le mot de passe défini dans mon docker-compose
+MINIO_BUCKET = "briancon-bronze"                                # Notre bucket cible pour le brut
+MINIO_SECURE = False                                            # En local, on n'utilise pas le protocole HTTPS sécurisé
 
 # ==========================================
 # 2. FONCTIONS
 # ==========================================
+# Configuration de notre client MinIO (notre GCS local)
 def create_minio_client():
-    client = Minio(MINIO_ENDPOINT, access_key=MINIO_ACCESS_KEY, secret_key=MINIO_SECRET_KEY, secure=MINIO_SECURE)
+    client = Minio(MINIO_ENDPOINT,                  # L'adresse de notre stockage
+                   access_key=MINIO_ACCESS_KEY,     # L'identifiant défini dans mon docker-compose
+                   secret_key=MINIO_SECRET_KEY,     # Le mot de passe défini dans mon docker-compose
+                   secure=MINIO_SECURE)             # En local, on n'utilise pas le protocole HTTPS sécurisé
     return client
 
 def ensure_bucket_exists(client, bucket_name):
@@ -59,12 +63,10 @@ def extract_weather_data():
     print("🌍 Lancement de l'extraction des données météo...")
     
     try:
-        # Appel à l'API
-        response = requests.get(API_URL)
-        
+        # Appel à l'API Open-Meteo
+        response = requests.get(API_URL)  
         # Vérifie si la requête a réussi (Code 200). Sinon, lève une erreur.
         response.raise_for_status()
-        
         # Convertit la réponse en dictionnaire Python
         data = response.json()
         
