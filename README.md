@@ -85,14 +85,20 @@ briancon-tourism-observatory/
 ├── 📁.venv/                    # Environnement virtuel
 ├── 📁dags/                     # Les workflows Airflow (DAGs)
 ├── 📁scripts/                  # Scripts d'extraction (API) et de chargement et transformation DuckDB *(équiv. BigQuery)*
-│   ├── 📄extract_api.py
-│   └── 📄load_to_duckdb.py
+│   ├── 📄extract_weather.py    # Script d'extraction des données météo pour Briançon
+│   ├── 📄extract_parking.py    # Script d'extraction et de validation des données de stationnement de Briançon
+│   ├── 📄silver_clean.py       # Script pour nettoyer les données de bronze vers silver ET charger dans PostgreSQL
+│   └── 📄gold_aggregate.py     # Script pour agréger les données de silver vers gold et DuckDB
 ├── 📁src/                      # Mon code (source) réutilisable (logique métier)
 │   ├── 📄__init__.py
 │   └── 📄utils.py
 ├── 📁data/                     # Monté en volume Docker (miroir de GCS) : Dossier contenant les données brutes et traitées (ignoré par Git)
-│   ├── 📄raw/                  # Équivalent Bucket "Landing"
-│   └── 📄gold/                 # Équivalent BigQuery (Fichiers DuckDB)
+│   ├── 📄briancon-bronze/      # Équivalent Bucket "Landing"
+│   ├── 📄briancon-silver/      # Équivalent Bucket "Landing"
+│   └── 📄briancon-gold/        # Équivalent BigQuery (Fichiers DuckDB)
+├── 📁analytics/                # Mon espace de travail local (ignoré par Git)
+│   ├── 📄db/                   # Base DuckDB du fichier Parquet
+│   └── 📄temp_export/          # Fichier Parquet temporaire
 ├── 📁sql/                      # Requêtes de création de tables et de vues
 ├── 📁tests/                    # Tests unitaires
 └── 📁config/                   # Fichiers de configuration (YAML/JSON)
