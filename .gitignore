@@ -9,5 +9,6 @@ pip-wheel-metadata/
 .env
 .vscode/
 data/
+analytics/
 postgres_data/
 

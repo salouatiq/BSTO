@@ -26,9 +26,9 @@ MINIO_BUCKET_SILVER = "briancon-silver"
 MINIO_BUCKET_GOLD = "briancon-gold"
 MINIO_SECURE = False
 
-# Chemins locaux ajustés pour s'exécuter depuis la racine du projet
-GOLD_DIR = "data/gold"
-DUCKDB_DIR = "data/duckdb"
+# Chemins locaux en dehors du territoire de MinIO, ajustés pour s'exécuter depuis la racine du projet
+GOLD_DIR = "analytics/temp_export"
+DUCKDB_DIR = "analytics/db"
 DUCKDB_PATH = f"{DUCKDB_DIR}/briancon.duckdb"
 
 # ==========================================
