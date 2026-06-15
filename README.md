@@ -76,20 +76,22 @@ graph TD
 
 ```text
 briancon-tourism-observatory/
-├── 📄docker-compose.yml        # Conteneur global 
-├── 📄.gitignore
-├── 📄.env                      # Pour stocker tes mots de passe localement
+├── 📄docker-compose.yml        # Conteneur global : Chef d'orchestre de l'infrastructure locale (MinIO, Postgres)
+├── 📄.gitignore                # Fichier d'exclusion pour préserver la sécurité du dépôt
+├── 📄.env                      # Variables d'environnement et secrets locaux (Ignoré par Git)
 ├── 📄README.md                 # Documentation du projet
 ├── 📄requirements.txt          # Liste des dépendances Python
-├── 📄main.py                   # Le chef d'orchestre qui appelle les scripts ETL dans l'ordre
-├── 📁.venv/                    # Environnement virtuel
-├── 📁dags/                     # Les workflows Airflow (DAGs)
-├── 📁scripts/                  # Scripts d'extraction (API) et de chargement et transformation DuckDB *(équiv. BigQuery)*
+├── 📄run_pipeline.sh           # Script Bash d'exécution séquentielle du pipeline complet
+├── 📁.github/agents/           # Configurations spécifiques aux dépendances/CI
+├── 📁.vscode/                  # Paramètres locaux de l'éditeur VS Code (Ignoré par Git)
+├── 📁.venv/                    # Environnement virtuel (Ignoré par Git)
+├── 📁dags/                     # Les workflows et pipelines de tâches Airflow (DAGs)
+├── 📁scripts/                  # Scripts exécutables du pipeline ETL
 │   ├── 📄extract_weather.py    # Script d'extraction des données météo pour Briançon
 │   ├── 📄extract_parking.py    # Script d'extraction et de validation des données de stationnement de Briançon
-│   ├── 📄silver_clean.py       # Script pour nettoyer les données de bronze vers silver ET charger dans PostgreSQL
-│   └── 📄gold_aggregate.py     # Script pour agréger les données de silver vers gold et DuckDB
-├── 📁src/                      # Mon code (source) réutilisable (logique métier)
+│   ├── 📄silver_clean.py       # Script pour nettoyer les données de bronze vers silver ET charger dans PostgreSQL (Bronze -> Silver / Postgres)
+│   └── 📄gold_aggregate.py     # Script pour agréger les données de silver vers gold et DuckDB (Silver -> Gold / DuckDB)
+├── 📁src/                      # Code source réutilisable (logique métier) et partagé + fonctions utilitaires (À créer)
 │   ├── 📄__init__.py
 │   └── 📄utils.py
 ├── 📁data/                     # Monté en volume Docker (miroir de GCS) : Dossier contenant les données brutes et traitées (ignoré par Git)
@@ -97,10 +99,10 @@ briancon-tourism-observatory/
 │   ├── 📄briancon-silver/      # Équivalent Bucket "Landing"
 │   └── 📄briancon-gold/        # Équivalent BigQuery (Fichiers DuckDB)
 ├── 📁analytics/                # Mon espace de travail local (ignoré par Git)
-│   ├── 📄db/                   # Base DuckDB du fichier Parquet
-│   └── 📄temp_export/          # Fichier Parquet temporaire
+│   ├── 📄db/                   # Emplacement de la base de données DuckDB (.db)
+│   └── 📄temp_export/          # Fichiers Parquet/CSV temporaires pour analyse
 ├── 📁sql/                      # Requêtes de création de tables et de vues
-├── 📁tests/                    # Tests unitaires
+├── 📁tests/                    # Tests unitaires pour valider les contrats de données
 └── 📁config/                   # Fichiers de configuration (YAML/JSON)
 ```
 ---
