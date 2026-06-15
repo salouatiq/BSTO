@@ -7,7 +7,7 @@ pip-wheel-metadata/
 
 # fichiers de configuration sensibles
 .env
-
+.vscode/
 data/
-
 postgres_data/
+
