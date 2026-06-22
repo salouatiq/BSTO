@@ -31,7 +31,7 @@ MINIO_SECURE = False
 # Configuration PostgreSQL (ajoutée)
 PG_USER = "admin"
 PG_PASSWORD = "briancon2026"
-PG_HOST = "localhost"
+PG_HOST = "postgres"  # <--- Remplacer localhost par postgres
 PG_PORT = "5432"
 PG_DB = "briancon_db"
 DATABASE_URI = f"postgresql://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DB}"
