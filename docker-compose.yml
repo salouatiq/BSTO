@@ -59,16 +59,16 @@ services:
       ports:
         - "6789:6789"    # Interface web Mage.ai (http://localhost:6789)
       volumes:
-        - .:/home/src/bsto_pproject
+        - .:/home/src/
       environment:
-        USER_CODE_PATH: /home/src/bsto_pproject
+        USER_CODE_PATH: /home/src/mage_project
         # MAGEAI_API_KEY: ${MAGEAI_API_KEY:-your_api_key_here}
         # MAGEAI_API_SECRET: ${MAGEAI_API_SECRET:-your_api_secret_here}
         # MAGEAI_STORAGE_BACKEND: minio
         # MAGEAI_STORAGE_BUCKET: briancon-bronze
         # MAGEAI_STORAGE_ENDPOINT: http://minio:9000
-        # MAGEAI_STORAGE_ACCESS_KEY: ${MINIO_USER:-admin}
-        # MAGEAI_STORAGE_SECRET_KEY: ${MINIO_PASSWORD:-briancon2026}
+        # MAGEAI_STORAGE_ACCESS_KEY: ${MINIO_USER:-admin@admin.com}
+        # MAGEAI_STORAGE_SECRET_KEY: ${MINIO_PASSWORD:-admin}
       depends_on:
         - minio
         - postgres

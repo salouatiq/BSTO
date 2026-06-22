@@ -11,4 +11,4 @@ pip-wheel-metadata/
 data/
 analytics/
 postgres_data/
-
+mage_data/
