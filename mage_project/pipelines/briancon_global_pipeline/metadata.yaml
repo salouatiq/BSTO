@@ -1,0 +1,123 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: purple
+  configuration: {}
+  downstream_blocks:
+  - run_clean_silver
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_extract_bronze
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks: []
+  uuid: run_extract_bronze
+- all_upstream_blocks_executed: true
+  color: grey
+  configuration: {}
+  downstream_blocks:
+  - run_aggregate_gold
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_clean_silver
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_extract_bronze
+  uuid: run_clean_silver
+- all_upstream_blocks_executed: true
+  color: yellow
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_aggregate_gold
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_clean_silver
+  uuid: run_aggregate_gold
+- all_upstream_blocks_executed: true
+  color: purple
+  configuration: {}
+  downstream_blocks:
+  - run_clean_parking_silver
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_extract_parking_bronze
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks: []
+  uuid: run_extract_parking_bronze
+- all_upstream_blocks_executed: true
+  color: grey
+  configuration: {}
+  downstream_blocks:
+  - run_aggregate_parking_gold
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_clean_parking_silver
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_extract_parking_bronze
+  uuid: run_clean_parking_silver
+- all_upstream_blocks_executed: true
+  color: yellow
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_aggregate_parking_gold
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_clean_parking_silver
+  uuid: run_aggregate_parking_gold
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2026-06-22 15:58:40.393266+00:00'
+data_integration: null
+description: Météeo de briançon
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: briancon_global_pipeline
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: briancon_global_pipeline
+variables_dir: /home/src/mage_data/mage_project
+widgets: []
