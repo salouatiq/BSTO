@@ -1,3 +1,19 @@
+# ============================================================================================================ #
+# docker-compose.yml 
+# Ce fichier docker-compose.yml configure un environnement de développement pour le projet Briançon.
+#
+# Il inclut les services suivants :
+# - MinIO : un service de stockage d'objets compatible avec Amazon S3, utilisé pour stocker les fichiers.
+# - PostgreSQL : une base de données relationnelle pour le stockage des données structurées.
+# - Mage.ai : un outil d'orchestration pour la gestion des workflows de données.
+# - Metabase : une plateforme de reporting et de visualisation de données. 
+#  
+# Il inclut également les networks et les volumes nécessaires pour le fonctionnement de ces services.   
+# ============================================================================================================ #
+
+# ============================================
+# SERVICES 
+# ============================================
 services:
   # ============================================
   # STOCKAGE : MinIO (remplace Google Cloud Storage)
@@ -72,7 +88,18 @@ services:
       depends_on:
         - minio
         - postgres
-
+  # ============================================
+  # BI & DASHBOARDING : Metabase
+  # ============================================
+  metabase:
+    image: metabase/metabase:latest
+    container_name: briancon_bi
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./analytics/metabase_data:/metabase-data
+    environment:
+      MB_DB_FILE: /metabase-data/metabase.db
 
 # ============================================
 # RÉSEAU DOCKER
