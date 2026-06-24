@@ -121,7 +121,7 @@ MINIO_PASSWORD=mdp
 ```bash
 docker-compose up -d
 ```
-**4 Préparer l'environnement Python (Pour le développement local)**
+**4. Préparer l'environnement Python (Pour le développement local)**
 ```bash
 python -m venv .venv
 
@@ -132,7 +132,7 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 ```
-**5 Exécuter le pipeline ETL complet**
+**5. Exécuter le pipeline ETL complet**
 Le pipeline est géré par l'orchestrateur Mage.ai.
 * Ouvrez votre navigateur web et rendez-vous sur : http://localhost:6789
 * Accédez au pipeline ``briancon_global_pipeline``
