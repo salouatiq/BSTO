@@ -58,7 +58,8 @@ def aggregate_weather_data(df):
 
 def process_silver_to_gold(client):
     logger.info("🔄 Téléchargement des données Silver depuis MinIO...")
-    objects = list(client.list_objects(MINIO_BUCKET_SILVER))
+    # On cible uniquement le dossier météo de manière récursive (c'est suite à la céation des dossiers clean_weather/ dans Silver)
+    objects = list(client.list_objects(MINIO_BUCKET_SILVER, prefix="clean_weather/", recursive=True))
     all_data = []
     
     for obj in objects:

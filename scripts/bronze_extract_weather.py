@@ -72,7 +72,7 @@ def extract_weather_data():
         
         # Génère un nom de fichier unique basé sur la date du jour
         today_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"briancon_weather_raw_{today_str}.json"
+        filename = f"weather/briancon_weather_raw_{today_str}.json"
         
         # Upload directement dans MinIO bronze (pas de sauvegarde locale)
         client = create_minio_client()

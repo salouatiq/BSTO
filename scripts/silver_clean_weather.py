@@ -81,6 +81,7 @@ def process_file(client, engine, object_name):
         client.put_object(
             MINIO_BUCKET_SILVER,
             f"clean_{object_name}",
+            #💡 Petite note d'architecture : Étant donné que object_name sera désormais égal à weather/briancon_weather_raw_..., quand mon script va le sauvegarder dans la zone Silver avec f"clean_{object_name}", cela va créer un dossier nommé clean_weather/ dans mon bucket Silver. C'est tout à fait propre et valide !               
             data=io.BytesIO(json_bytes),
             length=len(json_bytes),
             content_type='application/json'
@@ -108,7 +109,7 @@ if __name__ == "__main__":
     ensure_bucket_exists(client, MINIO_BUCKET_SILVER)
 
     # Lister les objets de bronze et les traiter
-    objects = client.list_objects(MINIO_BUCKET_BRONZE)
+    objects = client.list_objects(MINIO_BUCKET_BRONZE, prefix="weather/", recursive=True)
     for obj in objects:
         process_file(client, engine, obj.object_name)
 
