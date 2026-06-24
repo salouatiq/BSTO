@@ -55,6 +55,7 @@ Une **carte de recommandations d'investissement durable**.
 * **Conteneurisation (Compute) :** Docker 🐳
 * **Moteur Analytique (Gold / OLAP) :** DuckDB (équiv. BigQuery)🦆
 * **Orchestrateur ETL (DAGs) :** Mage.ai ⏳
+* **Data Visualisation (Business Intelligence) :** Metabase (équiv PowerBI)📊
 
 ---
 
