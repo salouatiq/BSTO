@@ -108,12 +108,12 @@ blocks:
   language: python
   name: run_extract_population_bronze
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: custom
   upstream_blocks: []
   uuid: run_extract_population_bronze
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: grey
   configuration: {}
   downstream_blocks:
@@ -124,13 +124,13 @@ blocks:
   language: python
   name: run_clean_population_silver
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: custom
   upstream_blocks:
   - run_extract_population_bronze
   uuid: run_clean_population_silver
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: yellow
   configuration: {}
   downstream_blocks: []
@@ -140,7 +140,7 @@ blocks:
   language: python
   name: run_aggregate_population_gold
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: custom
   upstream_blocks:
