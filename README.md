@@ -136,7 +136,7 @@ pip install -r requirements.txt
 Le pipeline est géré par l'orchestrateur Mage.ai.
 * Ouvrez votre navigateur web et rendez-vous sur : http://localhost:6789
 * Accédez au pipeline ``briancon_global_pipeline``
-* Cliquez sur "Run pipeline" dans l'onglet Triggers pour lancer l'extraction parallèle des 3 piliers (Météo, Mobilité, Population et hébérgement).
+* Cliquez sur ``Run pipeline`` dans l'onglet ``Triggers`` pour lancer l'extraction parallèle des 3 piliers (Météo, Mobilité, Population et hébérgement).
 
 ---
 
