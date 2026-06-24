@@ -53,7 +53,7 @@ Une **carte de recommandations d'investissement durable**.
 * **Data Lake (Stockage Objet) :** MinIO 🛢️
 * **Data Warehouse (Staging / Silver) :** PostgreSQL 🐘
 * **Conteneurisation (Compute) :** Docker 🐳
-* **Moteur Analytique (Gold / OLAP) :** DuckDB (équiv. BigQuery) 📊
+* **Moteur Analytique (Gold / OLAP) :** DuckDB (équiv. BigQuery)🦆
 * **Orchestrateur ETL (DAGs) :** Mage.ai ⏳
 
 ---
@@ -105,23 +105,38 @@ briancon-tourism-observatory/
 
 ## 🚀 Comment lancer le projet en local ?
 
-**1. Cloner le dépôt**
+**1. Cloner le dépôt et entrer dans le dossier**
 ```bash 
 git clone git@github.com:salouatiq/BSTO.git
+cd BSTO
 ```
-  
-
-**2. Installer les dépendances**
+**2. Configurer l'environnement local**
+Créez un fichier nommé 📄.env à la racine du projet et ajoutez-y vos variables locales. Par exemple :
+```bash 
+MINIO_ENDPOINT=localhost:9000
+MINIO_USER=user
+MINIO_PASSWORD=mdp
+```
+**3. Lancer l'infrastructure (Docker)**
 ```bash
+docker-compose up -d
+```
+**4 Préparer l'environnement Python (Pour le développement local)**
+```bash
+python -m venv .venv
+
+# Sur Windows :
+.venv\Scripts\activate
+# Sur Mac/Linux : 
+source .venv/bin/activate
+
 pip install -r requirements.txt
 ```
-
-
-**3. Lancer le pipeline complet**
-```bash
-python ./main.py
-```
-
+**5 Exécuter le pipeline ETL complet**
+Le pipeline est géré par l'orchestrateur Mage.ai.
+* Ouvrez votre navigateur web et rendez-vous sur : http://localhost:6789
+* Accédez au pipeline ``briancon_global_pipeline``
+* Cliquez sur "Run pipeline" dans l'onglet Triggers pour lancer l'extraction parallèle des 3 piliers (Météo, Mobilité, Population et hébérgement).
 
 ---
 
