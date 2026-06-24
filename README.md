@@ -50,9 +50,11 @@ Une **carte de recommandations d'investissement durable**.
 ## 🛠️ Stack Technique
 
 * **Langage principal :** Python 🐍 / SQL 🗄️
-* **Conteneurisation :** Docker 🐳
-* **Orchestration :** *(Apache Airflow)* ⏳
-* **Base de données :** *(PostgreSQL / Snowflake)* 📊
+* **Data Lake (Stockage Objet) :** MinIO 🛢️
+* **Data Warehouse (Staging / Silver) :** PostgreSQL 🐘
+* **Conteneurisation (Compute) :** Docker 🐳
+* **Moteur Analytique (Gold / OLAP) :** DuckDB (équiv. BigQuery) 📊
+* **Orchestrateur ETL (DAGs) :** Mage.ai ⏳
 
 ---
 
