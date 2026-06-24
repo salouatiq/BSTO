@@ -76,34 +76,28 @@ graph TD
 
 ```text
 briancon-tourism-observatory/
-├── 📄docker-compose.yml        # Conteneur global : Chef d'orchestre de l'infrastructure locale (MinIO, Postgres)
-├── 📄.gitignore                # Fichier d'exclusion pour préserver la sécurité du dépôt
-├── 📄.env                      # Variables d'environnement et secrets locaux (Ignoré par Git)
-├── 📄README.md                 # Documentation du projet
-├── 📄requirements.txt          # Liste des dépendances Python
-├── 📄run_pipeline.sh           # Script Bash d'exécution séquentielle du pipeline complet
-├── 📁.github/agents/           # Configurations spécifiques aux dépendances/CI
-├── 📁.vscode/                  # Paramètres locaux de l'éditeur VS Code (Ignoré par Git)
-├── 📁.venv/                    # Environnement virtuel (Ignoré par Git)
-├── 📁dags/                     # Les workflows et pipelines de tâches Airflow (DAGs)
-├── 📁scripts/                  # Scripts exécutables du pipeline ETL
-│   ├── 📄extract_weather.py    # Script d'extraction des données météo pour Briançon
-│   ├── 📄extract_parking.py    # Script d'extraction et de validation des données de stationnement de Briançon
-│   ├── 📄silver_clean.py       # Script pour nettoyer les données de bronze vers silver ET charger dans PostgreSQL (Bronze -> Silver / Postgres)
-│   └── 📄gold_aggregate.py     # Script pour agréger les données de silver vers gold et DuckDB (Silver -> Gold / DuckDB)
-├── 📁src/                      # Code source réutilisable (logique métier) et partagé + fonctions utilitaires (À créer)
-│   ├── 📄__init__.py
-│   └── 📄utils.py
-├── 📁data/                     # Monté en volume Docker (miroir de GCS) : Dossier contenant les données brutes et traitées (ignoré par Git)
-│   ├── 📄briancon-bronze/      # Équivalent Bucket "Landing"
-│   ├── 📄briancon-silver/      # Équivalent Bucket "Landing"
-│   └── 📄briancon-gold/        # Équivalent BigQuery (Fichiers DuckDB)
-├── 📁analytics/                # Mon espace de travail local (ignoré par Git)
-│   ├── 📄db/                   # Emplacement de la base de données DuckDB (.db)
-│   └── 📄temp_export/          # Fichiers Parquet/CSV temporaires pour analyse
-├── 📁sql/                      # Requêtes de création de tables et de vues
-├── 📁tests/                    # Tests unitaires pour valider les contrats de données
-└── 📁config/                   # Fichiers de configuration (YAML/JSON)
+├── 📄docker-compose.yml                 # Chef d'orchestre de l'infrastructure locale (Conteneurs MinIO, Postgres, Mage.ai)
+├── 📄.gitignore                         # Fichier d'exclusion pour préserver la propreté et la sécurité du dépôt Git
+├── 📄.env                               # Variables d'environnement et secrets locaux (Ignoré par Git)
+├── 📄README.md                          # Documentation principale du projet
+├── 📄requirements.txt                   # Liste des dépendances Python (pandas, minio, sqlalchemy, etc.)
+├── 📁.vscode/                           # Paramètres locaux de l'éditeur VS Code et configuration SQLTools (Ignoré par Git)
+├── 📁.venv/                             # Environnement virtuel Python (Ignoré par Git)
+├── 📁scripts/                           # Scripts exécutables du pipeline ETL (Python)
+│   ├── 📄bronze_extract_[domaine].py    # Extraction des données sources (API Open-Meteo, OSM, Geo) vers MinIO Bronze
+│   ├── 📄silver_clean_[domaine].py      # Nettoyage et enrichissement : MinIO Bronze -> MinIO Silver + PostgreSQL
+│   └── 📄gold_aggregate_[domaine].py    # Création des KPIs : PostgreSQL -> MinIO Gold (Parquet) + DuckDB
+├── 📁data/                              # Volume Docker pour le Data Lake local (Ignoré par Git)
+│   ├── 📁.minio.sys/                    # Fichiers système de MinIO
+│   ├── 📁briancon-bronze/               # Zone Bronze : Données brutes (JSON) classées par domaine (weather/, parking/, population/)
+│   ├── 📁briancon-silver/               # Zone Silver : Données nettoyées (JSON) classées par domaine
+│   └── 📁briancon-gold/                 # Zone Gold : Données agrégées (Parquet) classées par domaine
+├── 📁analytics/                         # Espace de travail analytique local (Ignoré par Git)
+│   ├── 📁db/                            # Base de données OLAP locale (Fichier briancon.duckdb)
+│   └── 📁temp_export/                   # Fichiers Parquet/CSV générés temporairement par les scripts Gold
+├── 📁postgres_data/                     # Volume Docker persistant pour la base de données PostgreSQL (Ignoré par Git)
+├── 📁mage_data/                         # Volume Docker persistant pour l'état interne de l'orchestrateur Mage.ai (Ignoré par Git)
+└── 📁mage_project/                      # Configuration, blocs de code et DAGs des pipelines Mage.ai
 ```
 ---
 
