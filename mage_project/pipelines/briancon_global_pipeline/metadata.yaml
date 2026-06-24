@@ -146,6 +146,55 @@ blocks:
   upstream_blocks:
   - run_clean_population_silver
   uuid: run_aggregate_population_gold
+- all_upstream_blocks_executed: true
+  color: purple
+  configuration: {}
+  downstream_blocks:
+  - run_clean_accommodation_silver
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_extract_accommodation_bronze
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks: []
+  uuid: run_extract_accommodation_bronze
+- all_upstream_blocks_executed: true
+  color: grey
+  configuration: {}
+  downstream_blocks:
+  - run_aggregate_accommodation_gold
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_clean_accommodation_silver
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_extract_accommodation_bronze
+  uuid: run_clean_accommodation_silver
+- all_upstream_blocks_executed: true
+  color: yellow
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: run_aggregate_accommodation_gold
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - run_clean_accommodation_silver
+  uuid: run_aggregate_accommodation_gold
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
