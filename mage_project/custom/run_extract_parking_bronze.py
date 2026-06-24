@@ -7,7 +7,7 @@ if 'custom' not in globals():
 def execute_custom_script(*args, **kwargs):
     print("🚗 Ordre reçu : Lancement de l'extraction des parkings vers Bronze...")
     
-    result = subprocess.run(["python", "scripts/extract_parking.py"], capture_output=True, text=True)
+    result = subprocess.run(["python", "scripts/bronze_extract_parking.py"], capture_output=True, text=True)
     print(result.stdout)
     
     if result.returncode != 0:
