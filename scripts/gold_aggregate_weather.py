@@ -88,7 +88,7 @@ def process_silver_to_gold(client):
     logger.info(f"💾 Fichier Parquet sauvegardé en local : {parquet_path}")
 
     # 4. Uploader vers gold
-    client.fput_object(MINIO_BUCKET_GOLD, "weather_gold.parquet", parquet_path)
+    client.fput_object(MINIO_BUCKET_GOLD, "weather/weather_gold.parquet", parquet_path)
     logger.info("☁️ Fichier Parquet sécurisé dans MinIO Gold")
 
     # 5. Charger dans DuckDB
