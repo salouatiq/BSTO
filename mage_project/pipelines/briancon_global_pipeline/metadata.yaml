@@ -1,53 +1,61 @@
 blocks:
 - all_upstream_blocks_executed: true
   color: purple
-  configuration: {}
+  configuration:
+    file_path: custom/run_extract_weather_bronze.py
+    file_source:
+      path: custom/run_extract_weather_bronze.py
   downstream_blocks:
-  - run_clean_silver
+  - run_clean_weather_silver
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: run_extract_bronze
+  name: run_extract_weather_bronze
   retry_config: null
   status: executed
   timeout: null
   type: custom
   upstream_blocks: []
-  uuid: run_extract_bronze
+  uuid: run_extract_weather_bronze
 - all_upstream_blocks_executed: true
   color: grey
-  configuration: {}
+  configuration:
+    file_source:
+      path: custom/run_clean_weather_silver.py
   downstream_blocks:
-  - run_aggregate_gold
+  - run_aggregate_weather_gold
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: run_clean_silver
+  name: run_clean_weather_silver
   retry_config: null
   status: executed
   timeout: null
   type: custom
   upstream_blocks:
-  - run_extract_bronze
-  uuid: run_clean_silver
-- all_upstream_blocks_executed: true
+  - run_extract_weather_bronze
+  uuid: run_clean_weather_silver
+- all_upstream_blocks_executed: false
   color: yellow
-  configuration: {}
+  configuration:
+    file_path: custom/run_aggregate_weather_gold.py
+    file_source:
+      path: custom/run_aggregate_weather_gold.py
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: run_aggregate_gold
+  name: run_aggregate_weather_gold
   retry_config: null
   status: executed
   timeout: null
   type: custom
   upstream_blocks:
-  - run_clean_silver
-  uuid: run_aggregate_gold
+  - run_clean_weather_silver
+  uuid: run_aggregate_weather_gold
 - all_upstream_blocks_executed: true
   color: purple
   configuration: {}
